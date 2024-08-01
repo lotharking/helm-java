@@ -6,30 +6,27 @@
   <parent>
     <groupId>com.marcnuri.helm-java</groupId>
     <artifactId>helm-java-parent</artifactId>
-    <version>0.0.11</version>
+    <version>0.0-SNAPSHOT-SNAPSHOT</version>
     <relativePath>../../pom.xml</relativePath>
   </parent>
-  <artifactId>windows-amd64</artifactId>
-  <name>Helm Java :: Windows Amd64</name>
+  <artifactId>lib-api</artifactId>
+  <name>Helm Java :: Native Library API</name>
   <description>
-    Native binaries for Helm Java for Windows Amd64
+    Native library API, allows to load the Native binaries.
   </description>
 
   <properties>
     <enforcer.skipRules>requireFilesExist</enforcer.skipRules>
   </properties>
 
-  <licenses>
-    <license>
-      <name>The Apache License, Version 2.0</name>
-      <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
-    </license>
-  </licenses>
-
   <dependencies>
     <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>lib-api</artifactId>
+      <groupId>net.java.dev.jna</groupId>
+      <artifactId>jna-jpms</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>net.java.dev.jna</groupId>
+      <artifactId>jna-platform-jpms</artifactId>
     </dependency>
   </dependencies>
 
@@ -37,13 +34,11 @@
     <resources>
       <resource>
         <directory>src/main/resources</directory>
+        <filtering>false</filtering>
       </resource>
       <resource>
-        <directory>../../native/out</directory>
-        <includes>
-          <include>helm-windows-4.0-amd64.h</include>
-          <include>helm-windows-4.0-amd64.dll</include>
-        </includes>
+        <directory>src/main/resources-filtered</directory>
+        <filtering>true</filtering>
       </resource>
       <resource>
         <directory>../../</directory>
